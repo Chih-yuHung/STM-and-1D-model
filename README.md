@@ -10,5 +10,6 @@ In this project, Sasha Hafner and Chih-Yu Hung compared the performance two slur
 
 # Output files/measured data
 ## Ottawa data
-  The measured manure temperature data from Ottawa was obtained in 2020. Manure temperatures at four depths (surface, upper, middle, which is 1m below surface, and bottom) were measured. The avg. manure temperature were weighted based on the depth. 
+  The measured manure temperature data from Ottawa was obtained in 2020 ('2020 FF DatasetManureTemperatureAndDepth_Calmar2020_HB'). Manure temperatures at four depths (surface, upper, middle, which is 1m below surface, and bottom) were measured. The avg. manure temperature were the avg. of the four measurements. 
+  
       
