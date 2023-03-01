@@ -1,12 +1,16 @@
 # STM-and-1D-model
-In this project, Sasha Hafner and Chih-Yu Hung compared the performance two slurry temperature model with three data set measured in Canada, Denmark, and Sweden. 
+In this project, we (Sasha Hafner and Chih-Yu Hung) are working on comparing the performance two slurry temperature model with three data set from Canada, Denmark, and Sweden. 
 
+This is currently a *work in progress* at the early stages. We expect to complete the comparison before summer 2023.
+
+# Contact information
+Find contact details here:
+* Sasha D. Hafner: https://au.dk/sasha.hafner@bce
+* Chih-Yu Hung: 
 
 # Input files
 ## Ottawa data
   The weather data, air temperature, wind speed, precipitation, and RH were obtained from Environment Canada. The missing data were interpolated. The solar radiation data were purchased from the Climatology Services. Maximum solar radiations were the maximum solar radiation for the period of 1971-2000 which were used in Rennie et al., 2021. 
-
-
 
 # Output files/measured data
 ## Ottawa data
