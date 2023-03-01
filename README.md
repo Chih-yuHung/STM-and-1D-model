@@ -1,7 +1,7 @@
 # STM-and-1D-model
 In this project, we (Sasha Hafner and Chih-Yu Hung) are working on comparing the performance two slurry temperature model with three data set from Canada, Denmark, and Sweden. 
 
-This is currently a *work in progress* at the early stages. We expect to complete the comparison before summer 2023.
+This is currently a *work in progress* at the early stages. We expect to complete the comparison before summer 2023. Results will be presented at the RAMIRAN conference in Cambridge in Spetember 2023.
 
 # Contact information
 Find contact details here:
