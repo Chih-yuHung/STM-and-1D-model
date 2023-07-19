@@ -6,7 +6,7 @@ This is currently a *work in progress* at the early stages. We expect to complet
 # Contact information
 Find contact details here:
 * Sasha D. Hafner: https://au.dk/sasha.hafner@bce
-* Chih-Yu Hung: chih-yu.hung@agr.gc.ca
+* Chih-Yu Hung: chih-yu.hung@mail.mcgill.ca
 
 # Input files
 ## Ottawa data
