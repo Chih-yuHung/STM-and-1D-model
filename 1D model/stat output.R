@@ -2,43 +2,110 @@
 #Site: Fittja,i.e. Orsundsbro(OR), site.
 #Four stats: RMSE, D, R2 and bias
 #five time period: annual, summer, fall, winter, spring. 
-#Spring: 122-171 (May 1, 2020-June 19,2020), Summer: 172-265 (June 20,2020,Sept 21)
-#Fall: 266-355 (Sept 22, 2020-Dec 20,2020), Winter:356-58 (Dec 21,2020-Feb 27, 2021)
+#Spring: 80-171 (March 20, 2020-June 19,2020), Summer: 172-265 (June 20,2020,Sept 21)
+#Fall: 266-355 (Sept 22, 2020-Dec 20,2020), Winter:356-79 (Dec 21,2020-Mar 20, 2021)
 #2020 is a leap year
+library(lubridate)
+
+#force the simulation length = observation
+obs.n <- nrow(na.omit(obs))
+obs <- obs[1:obs.n,]
+sim.og <- sim.og[1:obs.n,]
+sim.re <- sim.re[1:obs.n,]
+Envir.obs <- Envir.daily[1:obs.n,]
+
+obs$DOY[which(leap_year(obs$Year))] <- obs$DOY[which(leap_year(obs$Year))]-1
 
 #organize data for the last year and seasons
 #Observed manure temperature
 obs[,9] <- obs$Depth*100
 colnames(obs)[9] <- "Depth.cm"
-obs.n <- nrow(na.omit(obs))
-Spring.obs <- obs[122 <= obs$DOY & obs$DOY <= 171,]
+
+Spring.obs <- obs[80 <= obs$DOY & obs$DOY <= 171,]
 Summer.obs <- obs[172 <= obs$DOY & obs$DOY <= 265,]
 Fall.obs   <- obs[266 <= obs$DOY & obs$DOY <= 355,]
 Winter.obs <- rbind(obs[356 <= obs$DOY,],
-                          obs[obs$DOY <= 58,])
+                          obs[obs$DOY <= 79,])
 obs.y      <- list(obs[1:obs.n,], 
                          Spring.obs, Summer.obs
                          ,Fall.obs, Winter.obs)
-length(na.omit(obs$temp.avg))
+#Avg. temp for Table S2
+obs.avg <- data.frame(temp0.5 = rep(0,5),
+                      temp1.5 = rep(0,5),
+                      temp2.5 = rep(0,5),
+                      tempavg = rep(0,5),
+                      row.names = c("year","spring",
+                                    "summer","fall",
+                                    "winter"))
+for (i in 1:5) {
+obs.avg[i,1:3] <- round(colMeans(obs.y[[i]][,6:8]),1)
+obs.avg[i,4] <- round(mean(obs.y[[i]][,13]),1)
+}
+
 #The simulation results from original model 
-Spring.sim.og <- sim.og[122 <= sim.og$DOY & sim.og$DOY <= 171,]
+Spring.sim.og <- sim.og[80 <= sim.og$DOY & sim.og$DOY <= 171,]
 Summer.sim.og <- sim.og[172 <= sim.og$DOY & sim.og$DOY <= 265,]
 Fall.sim.og   <- sim.og[266 <= sim.og$DOY & sim.og$DOY <= 355,]
 Winter.sim.og <- rbind(sim.og[356 <= sim.og$DOY,],
-                      sim.og[sim.og$DOY <= 59,])
+                      sim.og[sim.og$DOY <= 79,])
 sim.og.y <- list(sim.og[1:obs.n,],
                        Spring.sim.og, Summer.sim.og
                        ,Fall.sim.og, Winter.sim.og)
 
+#Avg. temp for Table S2
+sim.og.avg <- data.frame(temp0.5 = rep(0,5),
+                         temp1.5 = rep(0,5),
+                         temp2.5 = rep(0,5),
+                         tempavg = rep(0,5),
+                         row.names = c("year","spring",
+                                    "summer","fall",
+                                    "winter"))
+for (i in 1:5) {
+  sim.og.avg[i,1:3] <- round(colMeans(sim.og.y[[i]][,13:15]),1)
+  sim.og.avg[i,4] <- round(mean(sim.og.y[[i]][,6]),1)
+}
+
+
 #The simulation results with revised model
-Spring.sim <- sim.re[122 <= sim.re$DOY & sim.re$DOY <= 171,]
+Spring.sim <- sim.re[80 <= sim.re$DOY & sim.re$DOY <= 171,]
 Summer.sim <- sim.re[172 <= sim.re$DOY & sim.re$DOY <= 265,]
 Fall.sim   <- sim.re[266 <= sim.re$DOY & sim.re$DOY <= 355,]
 Winter.sim <- rbind(sim.re[356 <= sim.re$DOY,],
-                      sim.re[sim.re$DOY <= 59,])
+                      sim.re[sim.re$DOY <= 79,])
 sim.re.y <- list(sim.re[1:obs.n,], 
                     Spring.sim, Summer.sim
                     ,Fall.sim, Winter.sim)
+
+#Avg. temp for Table S2
+sim.avg <- data.frame(temp0.5 = rep(0,5),
+                      temp1.5 = rep(0,5),
+                      temp2.5 = rep(0,5),
+                      tempavg = rep(0,5),
+                      row.names = c("year","spring",
+                                    "summer","fall",
+                                    "winter"))
+for (i in 1:5) {
+  sim.avg[i,1:3] <- round(colMeans(sim.re.y[[i]][,13:15]),1)
+  sim.avg[i,4] <- round(mean(sim.re.y[[i]][,6]),1)
+}
+
+
+#Descriptive stat data
+summary(obs$temp0.5) #VA:-0.8 to 20.3, OR:-0.4 to 21.4
+summary(obs$temp2.5) #VA:2.5 to 16.5, OR: 0.6 to 19.7
+summary(obs$temp.avg) #VA: 8.6, OR: 10.9
+mean(Summer.obs$temp.avg) #VA:15.4  ,OR:17.2
+#This is adjust to obtian air temperature during study period only.
+Spring.air <- Envir.obs[80 <= Envir.obs$DOY & Envir.obs$DOY <= 171,]
+mean((Spring.air$AirTmax1+Spring.air$AirTmin1)/2) #VA:5.7   OR:11.0
+Summer.air <- Envir.obs[172 <= Envir.obs$DOY & Envir.obs$DOY <= 265,]
+mean((Summer.air$AirTmax1+Summer.air$AirTmin1)/2) #VA:15.0   OR:16.2
+Fall.air <- Envir.obs[266 <= Envir.obs$DOY & Envir.obs$DOY <= 355,]
+mean((Fall.air$AirTmax1+Fall.air$AirTmin1)/2) #VA:6.2   OR:6.7
+Winter.air <- rbind(Envir.obs[356 <= Envir.obs$DOY,],
+                    Envir.obs[Envir.obs$DOY <= 79,])
+mean((Winter.air$AirTmax1+Winter.air$AirTmin1)/2) #VA:-2.2   OR:-2.6
+mean((Envir.obs$AirTmax1+Envir.obs$AirTmin1)/2) #VA: 6.4 OR:8.3
 
 #A table for RMSE, d, R2, bias
 stat.avg <- data.frame(Depth = c("sample size",rep(c("Avg.","0.5 m","1.5 m", "2.5 m"),each = 4)),
@@ -155,13 +222,17 @@ for (i in 1:4) {
 
 # Summary for the results, part 2. Only output after all simulation is done. 
 #The data of manure tank, i.e output L1:M18
-Output.tank <- data.frame(matrix(ncol = 2,nrow = 18))
-Output.tank[1:18,1] <- c("Location","SurfaceArea(m2)","Starting.Depth(m)"
+Output.tank <- data.frame(matrix(ncol = 2,nrow = 29))
+Output.tank[1:29,1] <- c("Location","SurfaceArea(m2)","Starting.Depth(m)"
                          ,"Starting.Volume.m3","Total.Solids(%)",""
                          ,"Tank.Storage","Total.Tank.Volume(m3)"
                          ,"Yearly Maximum Storage Volume.m3","Yearly.Rain.Volume.m3"
                          ,"Yearly.Manure.Storage.Volume.m3","Tank.Diameter.m",""
-                         ,"Average.Tm.C","Max.Tm.C","Min.Tm.C","","Max.d.cm")
+                         ,"Average.Tm.C","Max.Tm.C","Min.Tm.C","","Max.d.cm","annual snow.cm"
+                         ,"Summer.Tm.C","Summer.Tm.re.C","Summer.Tm.me.C"
+                         ,"Winter.Tm.C","Winter.Tm.re.C","Winter.Tm.me.C"
+                         ,"Annual.Tm.C","Annual.Tm.re.C","Annual.Tm.me.C"
+                         ,"Total radiation")
 Output.tank[1,2] <- Location
 Output.tank[2:3,2] <- c(Au,M.depth)        #area and initial depth, m2 and m
 Output.tank[4,2] <- as.numeric(Output.tank[2,2])*as.numeric(Output.tank[3,2]) #starting volume.
@@ -176,8 +247,14 @@ Output.tank[14,2] <- mean(Output$Temperature.C) #Avg. manure Temperature for the
 Output.tank[15,2] <- max(Output$Temperature.C)  #Max manure Temperature
 Output.tank[16,2] <- min(Output$Temperature.C)  #Min manure Temperature
 Output.tank[18,2] <- max(Output$Depth.cm)       #Maximum Manure Depth
-
-
+Output.tank[19,2] <- sum(Output$`snow depth`)       #Maximum Manure Depth
+Output.tank[c(20,21,22),2] <- c(mean(Summer.sim.og$Temperature.C),mean(Summer.sim$Temperature.C),
+                                mean(Summer.obs$temp.avg))
+Output.tank[c(23,24,25),2] <- c(mean(Winter.sim.og$Temperature.C),mean(Winter.sim$Temperature.C),
+                                mean(Winter.obs$temp.avg))
+Output.tank[c(26,27,28),2] <- c(mean(sim.og$Temperature.C),mean(sim.re$Temperature.C),
+                                mean(obs$temp.avg))
+Output.tank[29,2] <- sum(Output$`total radiation`)/12/277.77778
 
 #write the results out
 library(xlsx)
@@ -187,12 +264,20 @@ sheet <- createSheet(wb, "pic")
 addPicture(manure.pic, sheet, startRow = 1, startColumn = 1)
 saveWorkbook(wb, file = paste(result,Location,"/stat/",Location,"_",
 test,".xlsx",sep = ""), password = NULL)
+write.xlsx(sim.og,
+           file = paste(result,Location,"/stat/",Location,"_",
+                        test,".xlsx",sep = ""),
+           sheetName = "Output.og", row.names = F, append = TRUE)
+write.xlsx(sim.re,
+             file = paste(result,Location,"/stat/",Location,"_",
+                          test,".xlsx",sep = ""),
+             sheetName = "Output.re", row.names = F, append = TRUE)
 
-write.xlsx(stat.avg,
+write.xlsx(format(stat.avg,digit = 2),
            file = paste(result,Location,"/stat/",Location,"_",
                         test,".xlsx",sep = ""),
                sheetName = "overall stat", row.names = F, append = TRUE)
-write.xlsx(stat.avg.depth,
+write.xlsx(format(stat.avg.depth,digit =2),
            file = paste(result,Location,"/stat/",Location,"_",
                         test,".xlsx",sep = ""),
            sheetName = "stat by depth", row.names = F,append = TRUE)
