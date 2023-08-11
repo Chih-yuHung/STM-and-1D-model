@@ -1,8 +1,16 @@
 #Reset M.depth and ini.M.temp after soil temperature stabilization
-if (sum(i == 366 | i == 731 | i == 1096 | i == 1461) == 1) {
+if (nrow(Envir.daily) %% 366 == 0) {
+  if (i %% 366 == 1) {
+  M.depth <- parameters[1,15]
+  Zmmax <- M.depth 
+  }
+} else { 
+  if (i %% 365 == 1) {
   M.depth <- parameters[1,15]
   Zmmax <- M.depth
+  }
 }
+
 
 #Manure volume change, J60:O89
 zd[1] <- (Zmmax/2)/sum((1 + grid.c)^c(0:14))

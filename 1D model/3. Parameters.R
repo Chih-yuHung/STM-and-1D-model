@@ -8,22 +8,22 @@ removal.start <- removal.start[!is.na(removal.start)]
 removal.end <- as.numeric(as.Date(parameters[,6],format = "%m/%d/%Y"))
 removal.end <- removal.end[!is.na(removal.end)]
 
-removal.day <- rep((removal.end - removal.start)[1:(length(removal.start)/4)] + 1,3)
+removal.day <- (removal.end - removal.start)
 removal.duration <- list()
-for (i in (length(removal.start)/4 + 1):length(removal.start)) { 
-  removal.duration[[i - (length(removal.start)/4)]] <- c(removal.start[i]:removal.end[i])
+for (i in 1:length(removal.start)) { 
+  removal.duration[[i]] <- c(removal.start[i]:removal.end[i])
 }
 
 #Environmental input
 Envir.daily <- read.csv(paste("input/daily env input_",Location,".csv",sep = ""),header = T)
-#To produce an extra year for balance soil temperature
-Envir.daily <- Envir.daily[c(1:365,1:1095),]
+#To produce three more years for balance soil temperature
+Envir.daily <- Envir.daily[rep(1:366,4),]
 d.length <- nrow(Envir.daily)
 #initial manure temp
 ini.M.Temp <- read.csv("input/Initial M temp.csv",header = T)[,1]#change to vector
 
 
-source("3.1. snow depth.R", echo = FALSE)
+source("1D model/3.1. snow depth.R", echo = FALSE)
 
 mixing.day <- as.integer(parameters[1,7])
 mix.place <- parameters[2,7] #it's the pipe height from the bottom (m)
@@ -36,29 +36,18 @@ Tank.v <- Au*Htank             #Total tank volume, m3
 
 #Annual manure input
 M.storage <- parameters[1,10]  
-washout <- rep(parameters[2,10] * parameters[3,10] / 1000 / Au / 2,2) 
-#convert to depth m, the number in parameter is pig amount, 70 kg pig-1,  
+washout <- parameters[2,10] 
+#convert to depth m,,  
 
 #a vector to know the daily manure input
-M.factor <- na.omit(parameters[,11])   #manure input adjust factor
-f.day <- parameters[1,12]     #days in feed barn
-M.daily <- c()
-for (cycle in 1:length(M.factor)) {
-M.daily.temp <- c(rep(M.storage*M.factor[cycle]/365/Au,f.day),washout,0)
-M.daily <- c(M.daily,M.daily.temp)
-  }
-if (length(M.daily) < 365) {
-  M.daily <- rep(M.daily,2)
- }
- M.daily <- rep(M.daily[1:365],4)
-}
+M.daily <- M.storage/365/Au
  
 Freeboard <- parameters[1,13]   #freeboard, m
 sludge <- parameters[1,14]      #m
 
 #Manure depth
 M.depth <- parameters[1,15]     #This is the initial manure depth, m,
-removal.depth <- rep(na.omit(parameters[,16])/Au,3) #the depth to be removed from tank
+removal.depth <- na.omit(parameters[,16])/Au #the depth to be removed from tank
 
 
 #Manure properties

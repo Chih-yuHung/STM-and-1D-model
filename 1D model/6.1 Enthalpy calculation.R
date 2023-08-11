@@ -10,11 +10,7 @@ Enthalpy.c <- ifelse(M.Temp[,288] < f.point,M.Temp[,288]*rho.m*M.volume*C.pm/10^
   In.M.temp <- Avg.Barn.temp + Barn.temp.amp*sin(2*pi/365*T.day + Temp.cost) # Incoming manure temp
  
   #daily depth change
-  depthchange.d <- if (i %% mixing.day == 0) {
-    sum(M.daily[(i - mixing.day + 1):i]) + precip.d - Evap.depth.d
-  } else {
-    precip.d - Evap.depth.d
-  }
+  depthchange.d <- M.daily + precip.d - Evap.depth.d
   
   #determine the enthalpy before add precipitation
   depth.factor <- depthchange.d/M.depth
@@ -42,13 +38,11 @@ Final.M.Temp <- ifelse(Enthalpy.V < E.272, f.point*Enthalpy.V/E.272,
                             f.point + (Enthalpy.V - E.272)/fusion))
 
 # mix manure after removal
-if (i %% mixing.day == 0) {
   mix.range <- floor(min(30,round(30*(100/sum(M.volume.new)),0))/2) #the cells to be mixed
   outlet.cell <- which.min(abs(mix.place - seq(M.depth,0,length.out = 30))) #outlet place
   mix.cells <- c((outlet.cell - mix.range):(outlet.cell + mix.range))
   mix.cells <- unique(pmin(pmax(mix.cells,1),30))
   Final.M.Temp[mix.cells] <- mean(Final.M.Temp[mix.cells])  
-  }
 
 # check if temperature simulation
 if (mean(Final.M.Temp) >= (50 + 273.15) |

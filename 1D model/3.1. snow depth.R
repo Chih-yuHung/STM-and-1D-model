@@ -1,4 +1,5 @@
 #Simulate snow pack depth, cm because rain:snow = 1:10
+#daily snow fall depth, cm
 snow.f <- ifelse((Envir.daily$AirTmax1 + Envir.daily$AirTmin1)/2 <= 0 | 
                    Envir.daily$AirTmax1 <= 1, Envir.daily$precip,0)
 #The number 1 degree for AirTamx1 from Jennings et al., 2018 

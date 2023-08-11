@@ -4,7 +4,7 @@ library(dplyr)
 library(hydroGOF) #NSE 
 #Sweden project
 #To compare my simulation result to the measured data
-result <- "C:/Users/hungc/OneDrive - AGR-AGR/AAFC/Project 3_Sweden/3. Results/"
+result <- "AFC/Project 3_Sweden/3. Results/"
 #output to an excel file
 #Envir.daily <- read.csv(paste("input/daily env input_",Location,".csv",sep = ""),header = T)
 temp <- ((Envir.daily$AirTmax1 + Envir.daily$AirTmin1)/2)[731:1095] #Air Temp.avg
@@ -13,12 +13,6 @@ temp <- ((Envir.daily$AirTmax1 + Envir.daily$AirTmin1)/2)[731:1095] #Air Temp.av
 obs <- read.csv(paste(result,Location,"/",Location,".daily.csv",sep = ""),header = T) 
 depth.m <- read.csv(paste(result,Location,"/",Location,".depth.csv",sep = ""),header = T)
 
-#simulated data before calibration
-sim.og <- read.csv(paste(result,Location,"/original/",
-                                Location,"_",test,".csv",sep = ""),header = T) 
-SR.og <- sim.og$total.radiation/12/277.77778
-SR.og.cum <- cumsum(SR.og)
-Eva.og.cum <- cumsum(sim.og$Evaporation.cm)
 #simulated data after calibration and modification
 sim.re <- read.csv(paste(result,Location,"/with shade/",
                              Location,"_",test,".csv",sep = ""),header = T)

@@ -15,22 +15,22 @@ for (i in 1:d.length) {
   cc <- min(Envir.daily$cloud[i],1) #cloud clover
   precip.d <- (rain[i] + melt.act[i])/100
   #Snow simulation
-    source("3.2. Alpha.s_adjustment.R",echo = F)
+    source("1D model/3.2. Alpha.s_adjustment.R",echo = F)
     snow <- snow.p[i]
   RH6 <- Envir.daily$RH.6[i]
   RH15 <- Envir.daily$RH.15[i]
 
   #To calculate manure volume, encoding to be change if use mac
-  source("5. Manure volume.R",echo = F)
+  source("1D model/5. Manure volume.R",echo = F)
   #To calculate solar radiation, soil temp, and manure temp at 300 sec steps.
-  source("6. Solar radiation and soil temp_shade.R",echo = F)
+  source("1D model/6. Solar radiation and soil temp_shade.R",echo = F)
   #To calculate enthalpy.
-  source("6.1 Enthalpy calculation.R",echo = F)
+  source("1D model/6.1 Enthalpy calculation.R",echo = F)
   cat(paste("snow depth =",snow, sep = ""))
   #To calculate final hourly temp
-  source("7. hourly temp.R",echo = F)
+  source("1D model/7. hourly temp.R",echo = F)
   #retrieve manure temperature at 0.5m, 1.5m and 2.5 m
-  source("7.1 temp at three depths.R",echo = F)
+  source("1D model/7.1 temp at three depths.R",echo = F)
   
 
   #Write the results
@@ -39,7 +39,7 @@ for (i in 1:d.length) {
                       M.temp.depth,In.M.temp,alpha.s)
   print(paste("Sequence",i,"And Manure temp",Avg.M.temp.d))
 
-  source("5.1. Manure volume removal.R",echo = F)
+  source("1D model/5.1. Manure volume removal.R",echo = F)
   
   #Save the new temperatures
   ini.M.Temp <- Final.M.Temp
@@ -48,10 +48,10 @@ for (i in 1:d.length) {
 endtime <- Sys.time()
 print(endtime - starttime)
 
-Output <- Output[(d.length - 364):d.length,]
+Output <- tail(Output, n = d.length/4) # take the last yr
 
 
 #Shade/output to an excel file
-write.csv(Output,paste(Location,"/"
+write.csv(Output,paste("output/",Location,"/"
                          ,Location,"_",test,".csv",sep = ""),row.names = FALSE)
 

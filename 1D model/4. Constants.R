@@ -4,7 +4,7 @@ M.Temp <- matrix(ncol = 288,nrow = 30)               #manure temp calculation
 
 
 # Set Output Headers and Write parameters to Output
-Output <- data.frame(matrix(ncol = 17,nrow = d.length - 365))
+Output <- data.frame(matrix(ncol = 17,nrow = d.length))
 colnames(Output) <- c("Date ID","Year","Month","Day","DOY","Temperature.C","Depth.cm","Volume.m3"
                     ,"Evaporation.cm","Precipitation.cm","total radiation","snow depth"
                     ,"temp.05","temp.15","temp.25","In.M.temp","Solar absorb")
@@ -13,7 +13,6 @@ Output$Year <- format(seq(as.Date(start.date),as.Date(end.date),by = "days"),"%Y
 Output$Month <- format(seq(as.Date(start.date),as.Date(end.date),by = "days"),"%m")
 Output$Day <- format(seq(as.Date(start.date),as.Date(end.date),by = "days"),"%d")
 Output$DOY <- as.numeric(strftime(seq(as.Date(start.date), as.Date(end.date), by = "days"),format = "%j"))
-Output <- rbind(Output[1:365,],Output)
 #Used for manure storage
 n <- c(1:30)                    #cell numbers
 delta.zu <- c(0:29)
