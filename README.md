@@ -8,6 +8,14 @@ Find contact details here:
 * Sasha D. Hafner: https://au.dk/sasha.hafner@bce
 * Chih-Yu Hung: chih-yu.hung@mail.mcgill.ca
 
+# Tank information
+
+| Country | Tank key | Animal       | Weather station | Diameter (m) | Depth (m) | Buried depth (m) | Area (m2) | Volume (m3) |
+|---------|----------|--------------|-----------------|--------------|-----------|------------------|-----------|-------------|
+| SE      | A        | Dairy cattle | Backa           | 35.68        | 3         | 0                | 1000      | 3000        |
+| DK      | E        | Dairy cattle | Foulum          | 36           | 5.5       | 1.5              | 1018      | 5598        |
+| CA      | H        | Dairy cattle | Ottawa          | 40           | 2.44      | 0                | 1257      | 3066        |
+
 # Input files
 ## Ottawa data
   The weather data, air temperature, wind speed, precipitation, and RH were obtained from Environment Canada. The missing data were interpolated. The solar radiation data were purchased from the Climatology Services. Maximum solar radiations were the maximum solar radiation for the period of 1971-2000 which were used in Rennie et al., 2021. 
