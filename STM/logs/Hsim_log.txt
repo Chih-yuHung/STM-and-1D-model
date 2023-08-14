@@ -1,7 +1,7 @@
 Starting STM version 1.0 (9 March 2023)      
-Date and time: 2023/08/14 08:06:38
+Date and time: 2023/08/14 07:54:05
 
-Simulation ID: H
+Simulation ID: Hsim
 User par file: pars/H_user_pars.txt          
 Par file: pars/pars1.0.txt              
 Weather file: inputs/Ottawa_weather_2020.csv
@@ -9,4 +9,4 @@ Level file: inputs/H_level.txt
 
  Warning: Day of year > 365 found in weather file, and will be ignored.
 Done!
-Run time:    0.0270  seconds
+Run time:    0.0290  seconds
