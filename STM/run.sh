@@ -1,13 +1,15 @@
 # Runs simulations and makes plots
 
 # Remove old results
-rm stm_output/*.*
-rm plots/*.*
+#rm stm_output/*.*
+#rm plots/*.*
 
 sim_start_time="$SECONDS"
 
 # Run all simulations in parallel
-./stm H pars/pars0.13.txt pars/H_user_pars.txt inputs/Ottawa_weather_2020.csv inputs/H_level.txt
+./stm A pars/pars1.0.txt pars/A_user_pars.txt inputs/Backa_weather.csv inputs/A_level.txt &
+./stm E pars/pars1.0.txt pars/E_user_pars.txt inputs/Tjele_weather.csv inputs/E_level.txt &
+./stm H pars/pars1.0.txt pars/H_user_pars.txt inputs/Ottawa_weather_2020.csv inputs/H_level.txt
 
 sim_end_time="$SECONDS"
 

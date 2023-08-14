@@ -2,11 +2,10 @@
 # Can eliminate by dropping temp == NA
 # Problem seems to be multiple obs for same doy, some with NA
 
-dat$site.nm <- factor(dat$site, levels = c('H'), labels = c('Canada (H)'))
-dl$site.nm <- factor(dl$site, levels = c('H'), labels = c('Canada (H)'))
-#dl$site.nm <- factor(dl$site, levels = c('C', 'E', 'F'), labels = c('Sweden (C)', 'Denmark (E)', 'Canada (F)'))
+dat$site.nm <- factor(dat$site, levels = c('A', 'E', 'H'), labels = c('Sweden (A)', 'Denmark (E)', 'Canada (H)'))
+dl$site.nm <- factor(dl$site, levels = c('A', 'E', 'H'), labels = c('Sweden (A)', 'Denmark (E)', 'Canada (H)'))
 #rl$site.nm <- factor(rl$site, levels = c('C', 'E', 'F'), labels = c('Sweden (C)', 'Denmark (E)', 'Canada (F)'))
-#wthr$site.nm <- factor(wthr$site, levels = c('C', 'E', 'F'), labels = c('Sweden (C)', 'Denmark (E)', 'Canada (F)'))
+wthr$site.nm <- factor(wthr$site, levels = c('A', 'E', 'H'), labels = c('Sweden (A)', 'Denmark (E)', 'Canada (H)'))
 
 ## Issue is I want the NAs for the missing measurement period spring to summer, but I do not want them where there are other obs with measurements (different year)
 #dl <- subset(dl, !is.na(value) | 
@@ -23,7 +22,7 @@ ggplot(dl, aes(doy, value, colour = variable)) +
   theme_bw() +
   scale_color_brewer(palette = 'Dark2') +
   theme(legend.position = 'right')
-ggsave('../plots/temp_comp_doy.png', height = 3, width = 5)
+ggsave('../plots/temp_comp_doy.png', height = 3, width = 7)
 
 #ggplot(dat, aes(doy, temp)) +
 #  geom_line(aes(doy, floor_temp), colour = 'gray32', lty = 1) +
@@ -43,7 +42,7 @@ ggplot(dat, aes(doy, slurry_depth)) +
        colour = 'Position (from surface)') +
   theme_bw() +
   theme(legend.position = 'top')
-ggsave('../plots/depth_doy.png', height = 2.1, width = 4)
+ggsave('../plots/depth_doy.png', height = 2.1, width = 7)
 
 #ggplot(rl, aes(doy, value/1000, colour = variable)) +
 #  geom_line(alpha = 0.7) +
