@@ -1,0 +1,8 @@
+﻿parameter,Location name,Start date,End date,removal start date,removal end date,mixing day,Htank,ri,annual manure input (m3),manure input factor,feeder days,Freeboard,Sludge,Initial manure depth,manure volume removed,Total volatile solid,"Income manure Temp, amplitude, and phase constant",Latitude,Solar absorptivity,Extraterrestrial solar flux density,Atmospheric transimttance,Altitude,Emissivity,Soil density,Soil thermal conductivity ,Soil specific heat,air thermal conductivity,Teten's constant,freezing and thawing point,"snow min crit, max crit, melt r, sublimation threshold, sublimation r"
+value,Ottawa,1/1/2020,12/31/2020,1/8/2020,1/11/2020,1,2.44,20,9490,1,118,0.3,0.5,2.26,1000,0.08,12,45.252915,0.85,1395,0.75,94,0.925,1800,1.7,1220,0.045,0.611,272.45,-12
+,,,,1/23/2020,1/25/2020,1,,,,1,,,,,1000,,8,,,,,,,,,,,16.6269,273.15,2
+,,,,3/30/2020,3/31/2020,,,,,1,,,,,1000,,4.1,,,,,,,,,,,253.0185,,0.052
+,,,,4/23/2020,4/26/2020,,,,,,,,,,1000,,,,,,,,,,,,,21.87,,2
+,,,,7/23/2020,7/25/2020,,,,,,,,,,1000,,,,,,,,,,,,,265.5,,0.25
+,,,,9/11/2020,9/12/2020,,,,,,,,,,1000,,,,,,,,,,,,,,,
+,,,,10/16/2020,10/21/2020,,,,,,,,,,1000,,,,,,,,,,,,,,,
