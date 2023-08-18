@@ -1,0 +1,6 @@
+# Weather data in Sweden site
+Maximum solar radiations were from the Stockholm Bromma Airport. The latitude is 59°33'N, which is close the site (59°39'N)
+
+# Weather data in Denmark site
+The data were from station "606900".
+The relative humidity was assumed highest at 6 am and the lowest at 3 pm.
