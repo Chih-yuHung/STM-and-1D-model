@@ -2,10 +2,17 @@
 # Can eliminate by dropping temp == NA
 # Problem seems to be multiple obs for same doy, some with NA
 
+# Add blank for plot
+dl <- rbind(dl, data.frame(site = 'E', date = as.POSIXct('2020-05-09', format = '%Y-%m-%d'), doy = 130, variable = 'Measured slurry', value = NA))
+
 dat$site.nm <- factor(dat$site, levels = c('A', 'E', 'H'), labels = c('Sweden (A)', 'Denmark (E)', 'Canada (H)'))
 dl$site.nm <- factor(dl$site, levels = c('A', 'E', 'H'), labels = c('Sweden (A)', 'Denmark (E)', 'Canada (H)'))
 #rl$site.nm <- factor(rl$site, levels = c('C', 'E', 'F'), labels = c('Sweden (C)', 'Denmark (E)', 'Canada (F)'))
 wthr$site.nm <- factor(wthr$site, levels = c('A', 'E', 'H'), labels = c('Sweden (A)', 'Denmark (E)', 'Canada (H)'))
+
+#
+dl <- dl[site %in% c('A', 'E', 'H'), ]
+dat <- dat[site %in% c('A', 'E', 'H'), ]
 
 ## Issue is I want the NAs for the missing measurement period spring to summer, but I do not want them where there are other obs with measurements (different year)
 #dl <- subset(dl, !is.na(value) | 
