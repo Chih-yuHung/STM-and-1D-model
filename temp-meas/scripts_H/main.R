@@ -1,4 +1,4 @@
-# Calculates daily average slurry temperatures from measurements for Ottawa H site only
+# Exports daily average slurry temperatures from measurements for Ottawa H site only
 
 rm(list = ls())
 
