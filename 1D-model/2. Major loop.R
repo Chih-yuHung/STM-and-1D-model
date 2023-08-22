@@ -19,7 +19,10 @@ for (i in 1:d.length) {
     snow <- snow.p[i]
   RH6 <- Envir.daily$RH.6[i]
   RH15 <- Envir.daily$RH.15[i]
-
+  
+  #retrieve daily manure input
+  M.daily <- M.daily.vector[i]
+  
   #To calculate manure volume, encoding to be change if use mac
   source("1D-model/5. Manure volume.R",echo = F)
   #To calculate solar radiation, soil temp, and manure temp at 300 sec steps.
@@ -48,10 +51,17 @@ for (i in 1:d.length) {
 endtime <- Sys.time()
 print(endtime - starttime)
 
-Output <- tail(Output, n = d.length/4) # take the last yr
+Output.last <- tail(Output, n = d.length/4) # take the last yr
 
 
-#Shade/output to an excel file
-write.csv(Output,paste("1D-model/output/",Location,"/"
-                         ,Location,"_",test,".csv",sep = ""),row.names = FALSE)
+if (Location  == "Ottawa") {
+  Loc <- "Canada"
+} else if (Location == "Backa"){
+  Loc <- "Sweden"
+} else {
+  Loc <- "Denmark"
+}
 
+#output to an excel file
+write.csv(Output.last,paste("1D-model/output/",Loc,"/"
+                         ,Loc,"_result_",test,".csv",sep = ""),row.names = FALSE)

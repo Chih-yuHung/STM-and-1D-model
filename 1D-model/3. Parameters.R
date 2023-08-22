@@ -8,7 +8,7 @@ removal.start <- removal.start[!is.na(removal.start)]
 removal.end <- as.numeric(as.Date(parameters[,6],format = "%m/%d/%Y"))
 removal.end <- removal.end[!is.na(removal.end)]
 
-removal.day <- (removal.end - removal.start)
+removal.day <- (removal.end - removal.start)+1
 removal.duration <- list()
 for (i in 1:length(removal.start)) { 
   removal.duration[[i]] <- c(removal.start[i]:removal.end[i])
@@ -34,14 +34,11 @@ ri <- parameters[1,9]          #Inner radius of tank, m
 Au <- ri^2*pi                  #tank area, m2
 Tank.v <- Au*Htank             #Total tank volume, m3
 
-#Annual manure input
-M.storage <- parameters[1,10]  
-washout <- parameters[2,10] 
-#convert to depth m,,  
+#Annual manure input amounts and days
+M.storage <- na.omit(parameters[,10])  
+M.inputdays <- na.omit(parameters[,11]) 
+M.daily.vector <- rep(rep(M.storage,M.inputdays),4)
 
-#a vector to know the daily manure input
-M.daily <- M.storage/365/Au
- 
 Freeboard <- parameters[1,13]   #freeboard, m
 sludge <- parameters[1,14]      #m
 

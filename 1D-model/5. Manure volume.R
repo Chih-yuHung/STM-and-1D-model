@@ -2,7 +2,7 @@
 if (nrow(Envir.daily) %% 366 == 0) {
   if (i %% 366 == 1) {
   M.depth <- parameters[1,15]
-  Zmmax <- M.depth 
+  Zmmax <- M.depth
   }
 } else { 
   if (i %% 365 == 1) {
@@ -10,7 +10,6 @@ if (nrow(Envir.daily) %% 366 == 0) {
   Zmmax <- M.depth
   }
 }
-
 
 #Manure volume change, J60:O89
 zd[1] <- (Zmmax/2)/sum((1 + grid.c)^c(0:14))

@@ -46,7 +46,7 @@ Final.M.Temp <- ifelse(Enthalpy.V < E.272, f.point*Enthalpy.V/E.272,
 
 # check if temperature simulation
 if (mean(Final.M.Temp) >= (50 + 273.15) |
-    mean(Final.M.Temp[1]) >= AirTmax1 + 10 + 273.15 |
+    mean(Final.M.Temp[1]) >= AirTmax1 + 15 + 273.15 |
     mean(Final.M.Temp) <= (-10 + 273.15) ) {
   cat("Manure temperature too high/low to be true")
   cat(Final.M.Temp - 273.15)
