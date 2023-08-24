@@ -1,6 +1,7 @@
 
 ggplot(dat.sel, aes(doy, temp)) +
-  geom_line(alpha = 0.3) +
+  geom_line() +
+  geom_line(aes(y = temp3), colour = 'red') +
   geom_point(shape = 1, size = 0.2) +
   labs(x = 'Date', y = expression('Slurry temperature'~(degree*C)), colour = 'Depth (m)') +
   theme(legend.position = 'top')
