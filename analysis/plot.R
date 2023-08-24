@@ -21,5 +21,6 @@ ggplot(dlp, aes(doy, value, colour = variable, alpha = alpha)) +
   scale_color_brewer(palette = 'Dark2') +
   facet_grid(vtype ~ site.nm, scale = 'free_y') +
   force_panelsizes(rows = c(1, 0.5)) +
+  #coord_cartesian(ylim = c(-3, NA)) +
   theme(legend.position = 'top')
-ggsave('../plots/temp_level.png', height = 4, width = 7)
+ggsave('../plots/temp_level.png', height = 5, width = 7)

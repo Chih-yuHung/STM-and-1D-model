@@ -41,6 +41,10 @@ d <- fread('../1D-model/output/Sweden/Sweden_result_1.csv', header = TRUE)
 d[, site := 'A']
 a1d <- rbind(a1d, d)
 
+d <- fread('../1D-model/output/Denmark/Denmark_result_1.csv', header = TRUE)
+d[, site := 'E']
+a1d <- rbind(a1d, d)
+
 a1d[, slurry_temp := (temp.05 + temp.15 + temp.25) / 3]
 a1d[, slurry_temp_a1d := slurry_temp]
 
