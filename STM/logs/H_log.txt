@@ -1,5 +1,5 @@
 Starting STM version 1.0 (9 March 2023)      
-Date and time: 2023/08/18 13:45:28
+Date and time: 2023/08/24 19:50:51
 
 Simulation ID: H
 User par file: pars/H_user_pars.txt          
@@ -1785,4 +1785,4 @@ Level file: inputs/H_level.txt
  Warning: day of year          289 , hour          24 , Slurry depth is greater than maximum depth! Check inputs.
 
 Done!
-Run time:    0.0340  seconds
+Run time:    0.0310  seconds
