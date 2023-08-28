@@ -14,7 +14,7 @@ dat.all <- dat
 dat[, depth.min := min(depth), site]
 dat[, depth.max := max(depth), site]
 
-# Subset to min and max depths
+# Subset to min and max depths (so only top and bottom are used for average, I think)
 dat <- subset(dat, depth == depth.min | depth == depth.max)
 
 # Remove what are apparently air or sensor-in-sun temperatures from early site C measurements
