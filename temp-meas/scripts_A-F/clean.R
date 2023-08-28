@@ -20,16 +20,11 @@ dat <- subset(dat, depth == depth.min | depth == depth.max)
 # Remove what are apparently air or sensor-in-sun temperatures from early site C measurements
 dat <- subset(dat, site != 'C' | as.Date(date) > as.Date('2020-06-18'))
 
+# And remove some strange Tjele measurements at start and end, presumably sensors not in slurry
+dat <- subset(dat, site != 'E' | as.Date(date) > as.Date('2020-09-26'))
+
 # Average measured temperature
 dat.mean <- data.table(aggregate(temp ~ site + date, data = dat, FUN = mean))
-
-# Ottawa data already average by day of year
-dat.ca$country <- 'Canada'
-dat.ca$date <- date(as.POSIXct(paste(dat.ca$doy, dat.ca$year), format = '%j %Y'))
-dat.ca <- dat.ca[!is.na(dat.ca$temp), ]
-
-# Add to DK and SE data
-dat.mean <- rbind(dat.mean, dat.ca[, c('site', 'date', 'temp')])
 
 # DOY
 dat.mean$doy <- as.integer(as.character(dat.mean$date, format = '%j'))
