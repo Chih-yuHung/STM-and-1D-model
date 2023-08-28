@@ -1,0 +1,7 @@
+site,variable,rmse,mae,mbe,me
+A,slurry_temp_stm,1.86,1.47,-0.33,0.8
+E,slurry_temp_stm,0.98,0.87,0.87,0.94
+H,slurry_temp_stm,5.09,4.22,-2.73,0.38
+A,slurry_temp_a1d,2.3,1.82,1.7,0.69
+E,slurry_temp_a1d,1.93,1.69,-1.06,0.76
+H,slurry_temp_a1d,4.44,3.83,-3.66,0.53

@@ -7,7 +7,6 @@ a1d_sub <- a1d[, .(site, date, doy, slurry_temp_a1d)]
 mod <- merge(stm_sub, a1d_sub, by = c('site', 'date', 'doy'), all = TRUE)
 dat <- merge(meas, mod, by = c('site', 'date', 'doy'), all = TRUE)
 
-
 # Trim to within model data period (instead of all = FALSE above to get gap in Tjele data)
 dat[, `:=` (date.min = min(date[!is.na(slurry_temp_meas)]), date.max = max(date[!is.na(slurry_temp_meas)])), by = site]
 dat <- dat[date >= date.min & date <= date.max, ]
