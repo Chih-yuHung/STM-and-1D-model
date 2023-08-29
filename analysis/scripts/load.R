@@ -33,11 +33,11 @@ stm[, slurry_temp_stm := slurry_temp]
 # NTS
 
 a1d <- data.table()
-d <- fread('../../1D-model/output/Canada/Canada_result_1.csv', header = TRUE)
+d <- fread('../../1D-model/output/Canada/Canada_result_2.csv', header = TRUE)
 d[, site := 'H']
 a1d <- rbind(a1d, d)
 
-d <- fread('../../1D-model/output/Sweden/Sweden_result_1.csv', header = TRUE)
+d <- fread('../../1D-model/output/Sweden/Sweden_result_2.csv', header = TRUE)
 d[, site := 'A']
 a1d <- rbind(a1d, d)
 
