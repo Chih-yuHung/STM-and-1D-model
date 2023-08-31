@@ -16,7 +16,7 @@ dl <- melt(dat, id.vars = c('site', 'date', 'doy'),
            measure.vars = c('air_temp', 'slurry_temp_stm', 'slurry_temp_a1d', 'slurry_temp_meas', 'slurry_depth'))
 
 dl$variable <- factor(dl$variable, levels = c('air_temp', 'slurry_temp_meas', 'slurry_temp_stm', 'slurry_temp_a1d', 'slurry_depth'), 
-		      labels = c('Meas. air T', 'Meas. slurry T', 'STM slurry T', 'A1D slurry T', 'Slurry depth'))
+		      labels = c('Meas. air T', 'Meas. slurry T', 'STM slurry T', 'AAFC-1D slurry T', 'Slurry depth'))
 
 dl[, vtype := 'temp']
 dl[variable == 'Slurry depth', vtype := 'level']
